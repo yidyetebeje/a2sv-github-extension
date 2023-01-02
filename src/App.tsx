@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { GitHub, ExternalLink } from "react-feather";
+import Input from "./Input";
 import browser from "webextension-polyfill";
 interface AuthData {
   code: string;
@@ -51,7 +52,9 @@ function App() {
           setAuthData(payload);
           break;
         case "UPLOAD_FILE_RESPONSE":
-          await navigator.clipboard.write(payload.uri);
+          if (payload.success) {
+            await navigator.clipboard.writeText(payload.uri);
+          }
         // Replace button with link to gist
       }
       
@@ -66,15 +69,19 @@ function App() {
 
   return (
     <div className="App p-5 min-w-[300px] min-h-[200px] flex flex-col justify-center items-center">
-      <h1 className="font-bold text-5xl text-center">Auto Gistify</h1>
-      <button
-        type="button"
-        className="rounded-lg py-3 px-5 mt-3 bg-gray-900 hover:text-gray-500 transition-colors cursor-pointer font-medium hover:border-blue-500 focus:ring"
-        onClick={onLogin}
-      >
-        {authorized ? "Authorised" : "Authorise GitHub"}
-        <GitHub className="h-6 inline ml-3" />
-      </button>
+      <h1 className="font-bold text-5xl text-center">A2SV</h1>
+      {!authorized && (
+        <button
+          type="button"
+          className="rounded-lg py-3 px-5 mt-3 bg-gray-900 hover:text-gray-500 transition-colors cursor-pointer font-medium hover:border-blue-500 focus:ring"
+          onClick={onLogin}
+        >
+          {authorized ? "" : "Authorise GitHub"}
+          <GitHub className="h-6 inline ml-3" />
+        </button>
+      )}
+
+      {authorized && <Input />}
       {authData && (
         <div className="flex flex-row mt-2 items-center">
           <button
