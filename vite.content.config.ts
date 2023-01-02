@@ -13,7 +13,7 @@ export default defineConfig({
     outDir: resolve(__dirname, 'dist'),
     lib: {
       formats: ['iife'],
-      entry: resolve(__dirname, './content-script/index.tsx'),
+      entry: resolve(__dirname, './content_script.ts'),
       name: 'Vite/React/TailwindCSS Plugin'
     },
     rollupOptions: {

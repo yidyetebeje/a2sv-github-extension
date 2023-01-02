@@ -1,0 +1,39 @@
+.button-container {
+    position: relative;
+}
+
+.a2sv-button {
+    border-radius: 15px;
+    background: #93dbf7;
+    padding: 4px 12px;
+    position: absolute;
+    top: 2px;
+    right: 75px;
+    border: 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.a2sv-button:hover {
+    cursor: pointer;
+    background: #97d3dd;
+}
+
+.a2sv-button > span {
+    color: black;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.a2sv-button > object {
+    display: inline;
+    margin: 0 0 0 4px;
+    width: 16px;
+    height: 16px;
+}
+
+.a2sv-button > object:hover {
+    cursor: pointer;
+}

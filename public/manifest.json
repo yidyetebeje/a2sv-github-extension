@@ -9,17 +9,28 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://blank.org/*"],
-      "run_at": "document_end",
-      "js": ["./index.global.js"],
-      "css": ["./style.css"]
+      "matches": ["https://*/*", "http://*/*"],
+      
+      "js": ["index.global.js"],
+      "css": ["style.css", "a2sv.css"],
+      "run_at": "document_idle"
     }
   ],
-  "permissions": ["storage"],
+  "permissions": ["storage", "activeTab", "clipboardWrite", "tabs"],
   "background": {
-    "service_worker": "./background.global.js"
+    "service_worker": "./background.global.js",
+    "type": "module"
   },
   "icons": {
     "128": "vite.svg"
-  }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "*.global.js",
+        "vite.svg"
+      ],
+      "matches": ["http://*/*", "https://*/*"]
+    }
+  ]
 }

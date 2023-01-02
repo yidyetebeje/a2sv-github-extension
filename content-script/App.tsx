@@ -1,27 +1,34 @@
 
 
-function handleClick() {
-  console.log("helo")
-}
 
-function App() {
+
+function App({language}) {
+  const [content, setContent] = useState("");
+  const handleClick = async () => {
+    const extension = language ? `.${language}` : "";
+    const filename = crypto.randomUUID() + extension;
+    await chrome.runtime.sendMessage({
+      type: "UPLOAD_FILE",
+      payload: {
+        filename,
+        content,
+      },
+    });
+    await chrome.runtime.onMessage.addListener(async ({ type, payload }) => {
+      switch(type){
+        case "UPLOAD_FILE_RESPONSE":
+          const url = await payload.uri;
+      }
+    });
+  }
   return (
-    <div className="App flex flex-col gap-4 h-screen items-center justify-center">
-      <div className="text-5xl font-extrabold">
-        <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500">
-          This is My First Browser Extensions!
-        </span>
-      </div>
-      <div className="text-2xl text-gray-800">
-        Powered by Vite, React, TypeScript, and TailwindCSS
-      </div>
       <button
-        className="px-4 py-2 font-semibold text-sm bg-cyan-500 text-white rounded-full shadow-sm"
-        onClick={handleClick}
+        className="px-4 py-2 font-semibold text-sm bg-teal-800 text-white rounded-full shadow-sm absolute top-0 right-10"
+      onClick={handleClick}
+      
       >
-        Click me!
+         a2svify
       </button>
-    </div>
   );
 }
 
