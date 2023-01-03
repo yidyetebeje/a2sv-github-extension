@@ -9,9 +9,11 @@
     "build:js": "vite build --config vite.content.config.ts",
     "preview": "vite preview",
     "build:web": "tsc && vite build",
-    "build:chrome": "NODE_ENV=production run-s build:js build:background:chrome build:web"
+    "build:chrome": "SET NODE_ENV=production && run-s build:js build:background:chrome build:web"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.7",
+    "@heroicons/react": "^2.0.13",
     "@types/webextension-polyfill": "^0.9.2",
     "flowbite": "^1.5.5",
     "flowbite-react": "^0.3.7",

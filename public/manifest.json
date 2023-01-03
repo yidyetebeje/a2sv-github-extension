@@ -12,7 +12,7 @@
       "matches": ["https://*/*", "http://*/*"],
       
       "js": ["index.global.js"],
-      "css": ["style.css", "a2sv.css"],
+      "css": ["a2sv.css"],
       "run_at": "document_idle"
     }
   ],

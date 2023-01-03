@@ -3,14 +3,15 @@ const BASE_URL = "https://github.com/login";
 const USER_CODE_ENDPOINT = "/device/code";
 const USER_AUTH_ENDPOINT = "/oauth/access_token";
 
-const CLIENT_ID = "15ca1014289369cdbd6c";
+const CLIENT_ID1 = "15ca1014289369cdbd6c";
+const CLIENT_ID = "8b1dfbc467199f0ffda9";
 
 export const getVerificationCode = async ()=> {
   const response = await fetch(BASE_URL + USER_CODE_ENDPOINT, {
     method: "POST",
     body: JSON.stringify({
       client_id: CLIENT_ID,
-      scope: "gist",
+      scope: "repo",
     }),
     headers: {
       Accept: "application/json",
@@ -39,5 +40,6 @@ export const pollAuthorization = async (deviceCode: string, interval: number) : 
     data = await response.json();
     await new Promise((resolve) => setTimeout(resolve, interval * 1000));
   }
+  console.log(data);
   return data.access_token;
 };

@@ -1,11 +1,13 @@
 import { Chrome } from "react-feather";
-import { browserAction } from "webextension-polyfill";
 import { getVerificationCode, pollAuthorization } from "./oauth";
 import { updateOrUploadFile } from "./submitQuestion";
 console.log("background process is running")
+
 chrome.runtime.onMessage.addListener(async ({ type, payload }) => {
   const key = "accessToken";
   const at = (await chrome.storage.sync.get(key))[key];
+  const repo = (await chrome.storage.sync.get("repo"))["repo"];
+  console.log("repo", repo)
   switch (type) {
     case "AUTH_REQUEST":
       const verification = await getVerificationCode();
@@ -29,7 +31,6 @@ chrome.runtime.onMessage.addListener(async ({ type, payload }) => {
       );
 
       console.log("Authorized Auto Gistify");
-
       chrome.storage.sync.set({
         accessToken,
       });
@@ -44,12 +45,11 @@ chrome.runtime.onMessage.addListener(async ({ type, payload }) => {
           console.log(tab);
           const uri = await updateOrUploadFile(
             {
-              owner: "yidyedelina",
-              repo: "A2SV",
+              repo,
               path: `${tab}${payload.extension}`,
               content: payload.content,
-              message: "Test",
-              authToken: "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",
+              message: `added ${tab}${payload.extension}`,
+              authToken: at,
             }
           );
           
@@ -69,20 +69,17 @@ chrome.runtime.onMessage.addListener(async ({ type, payload }) => {
       try {
         const uri = await updateOrUploadFile(
           {
-            owner: "yidyedelina",
-            repo: "A2SV",
-            path: `${payload.filename}.${payload.extension}`,
+            repo,
+            path: `${payload.filename}`,
             content: payload.content,
-            message: "Test",
-            authToken: "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",
+            message: `added ${payload.filename}`,
+            authToken: at,
           }
         );
         console.log(uri)
         await chrome.runtime.sendMessage({
           type: "UPLOAD_FILE_RESPONSE",
-          payload: {
-            uri,
-          }
+          payload: uri
         })
 
       } catch (err) {

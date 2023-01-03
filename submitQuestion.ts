@@ -1,6 +1,5 @@
-const BASE_URL = "https://api.github.com/repos";
-export async function updateOrUploadFile({ owner, repo, path, content, message, authToken }: { owner: string, repo: string, path: string, content: string, message: string, authToken: string }){
-  const url = `${BASE_URL}/${owner}/${repo}/contents/${path}`;
+export async function updateOrUploadFile({ repo, path, content, message, authToken }: { repo: string, path: string, content: string, message: string, authToken: string }){
+  const url = `${repo}/contents/${path}`;
   let response;
   try {
     const getPost = await fetch(url, {

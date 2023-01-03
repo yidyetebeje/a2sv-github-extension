@@ -74,7 +74,7 @@ function createSubmitButton(element, language) {
       const language = getLanguage(codeBlock);
       createSubmitButton(codeBlock, language);
     }
-  }, 2000);
+  }, 5000);
   chrome.runtime.onMessage.addListener(async function (response, sendResponse) {
     const res = response;
     console.log("response", res.payload.content.html_url);

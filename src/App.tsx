@@ -53,7 +53,8 @@ function App() {
           break;
         case "UPLOAD_FILE_RESPONSE":
           if (payload.success) {
-            await navigator.clipboard.writeText(payload.uri);
+            console.log("Uploaded file successfully", payload);
+            await navigator.clipboard.writeText(payload?.content.html_url);
           }
         // Replace button with link to gist
       }
@@ -68,7 +69,7 @@ function App() {
   }, []);
 
   return (
-    <div className="App p-5 min-w-[300px] min-h-[200px] flex flex-col justify-center items-center">
+    <div className="App text-white bg-gray-800 p-5 min-w-[300px] min-h-[300px] flex flex-col justify-center items-center bg-dark">
       <h1 className="font-bold text-5xl text-center">A2SV</h1>
       {!authorized && (
         <button
