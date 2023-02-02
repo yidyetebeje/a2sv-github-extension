@@ -1,6 +1,6 @@
 {
-  "name": "Vite/React/TailwindCSS Plugin",
-  "description": "A Cross Browser Template for Google Chrome",
+  "name": "a2sv chrome extension",
+  "description": "an automated way to submit to github",
   "version": "1.0.0",
   "manifest_version": 3,
   "action": {

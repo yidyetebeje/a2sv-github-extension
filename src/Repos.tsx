@@ -39,7 +39,8 @@ export default function Repos() {
         );
   const fetchRepos = async (accessToken: string) => {
     try {
-      const response = await (await fetch("https://api.github.com/users/yidyedelina/repos", {
+      const owner = (await browser.storage.sync.get("userData"))["userData"].login;
+      const response = await (await fetch(`https://api.github.com/users/${owner}/repos`, {
         method: "get",
         headers: {
           Accept: "application/vnd.github+json",
