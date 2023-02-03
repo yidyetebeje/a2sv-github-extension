@@ -21,14 +21,12 @@
     "service_worker": "./background.global.js",
     "type": "module"
   },
-  "icons": {
-    "128": "vite.svg"
-  },
+ 
   "web_accessible_resources": [
     {
       "resources": [
-        "*.global.js",
-        "vite.svg"
+        "*.global.js"
+        
       ],
       "matches": ["http://*/*", "https://*/*"]
     }

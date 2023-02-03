@@ -38,13 +38,13 @@ function createSubmitButton(element, language) {
   button.className = "a2sv-button";
   const label = document.createElement("span");
   label.textContent = "a2svify";
-  const iconURL = chrome.runtime.getURL("vite.svg");
-  const icon = document.createElement("object");
-  icon.data = iconURL;
-  icon.type = "image/svg+xml";
-  icon.title = "GitHub icon";
+  // const iconURL = chrome.runtime.getURL("vite.svg");
+  // const icon = document.createElement("object");
+  // icon.data = iconURL;
+  // icon.type = "image/svg+xml";
+  // icon.title = "GitHub icon";
   button.appendChild(label);
-  button.appendChild(icon);
+  //button.appendChild(icon);
   console.log("button created")
   button.addEventListener("click", async () => {
     // Create gist with target language
